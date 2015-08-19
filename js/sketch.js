@@ -21,7 +21,6 @@ function sketchProc(processing) {
 
     };
 
-
     processing.draw = function() {
 	var frame = controller.frame();
 	
@@ -50,22 +49,33 @@ function sketchProc(processing) {
 	    processing.background(0);
 	}
 
-	var hand = frame.hands[0];
-	var index = hand.indexFinger;
-	var x = index.tipPosition[0];
-	var y = index.tipPosition[1];
-	var z = index.tipPosition[2];
-	var point = {"x": x, "y": y, "z": z};
-	points.push(point);
+	processing.translate(processing.width/2, processing.height, 0);
 
+	// get coordinates of finger tip
+	var hand = frame.hands[0];
+	var finger = hand.indexFinger;
+	var point = getFingertip(finger);
+
+	drawPoint(point);
+
+	points.push(point);
+    };
+
+    function getFingertip(finger) {
+	var point = {"x": finger.tipPosition[0],
+		     "y": finger.tipPosition[1],
+		     "z": finger.tipPosition[2]};
+	return point;
+    }
+
+    function drawPoint(point) {
 	processing.pushMatrix();
 
-	processing.translate(processing.width/2, processing.height, 0);
-	processing.translate(x, -y, z);
-
+	processing.translate(point.x, -point.y, point.z);
 	processing.sphere(12);
+
 	processing.popMatrix();
-    };
+    }
 }
 
 
