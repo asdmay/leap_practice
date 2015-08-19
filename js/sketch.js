@@ -28,7 +28,6 @@ function sketchProc(processing) {
 	if(frame.hands.length == 0) {
 	    return;
 	}
-	// console.log(frame.hands.length);
 
 	frame.gestures.forEach(function(gesture){
 	    if (gesture.type == "keyTap") {
@@ -58,7 +57,6 @@ function sketchProc(processing) {
 	var z = index.tipPosition[2];
 	var point = {"x": x, "y": y, "z": z};
 	points.push(point);
-	// console.log("x: " + x, ", y: ", + y + ", z: " + z);
 
 	processing.pushMatrix();
 
@@ -67,14 +65,9 @@ function sketchProc(processing) {
 
 	processing.sphere(12);
 	processing.popMatrix();
-
-	// console.log(points);
-	// console.log(points.length);
     };
 }
 
 
 var canvas = document.getElementById("sketch");
-// attaching the sketchProc function to the canvas
 var p = new Processing(canvas, sketchProc);
-// p.exit(); to detach it
