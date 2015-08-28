@@ -4,8 +4,8 @@ function sketchProc(processing) {
     processing.setup = function(){
 	processing.size(480, 480, processing.P3D);
 
-	processing.fill(processing.color(255, 0, 255));
-	processing.stroke(processing.color(255, 0, 0));
+	processing.fill(255);
+	processing.stroke(255);
 
 	count = 0;
     };
