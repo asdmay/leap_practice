@@ -24,7 +24,7 @@ function sketchProc(processing) {
     function drawPoint(point) {
 	processing.pushMatrix();
 
-	processing.translate(point.x, -point.y, point.z);
+	processing.translate(point.x, point.y, point.z);
 	processing.sphere(12);
 
 	processing.popMatrix();
