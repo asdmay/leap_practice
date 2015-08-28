@@ -17,13 +17,14 @@ function sketchProc(processing) {
 	    return;
 	}
 
-	drawPoint(points[count++]);
 
 	if (points.length <= count) {
 	    count = 0;
 
 	    processing.background(0);
 	}
+
+	drawPoint(points[count++]);
     };
 
 
