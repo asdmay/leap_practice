@@ -11,6 +11,12 @@ function sketchProc(processing) {
     };
 
     processing.draw = function() {
+	if (points.length <= 0) {
+	    processing.background(0);
+
+	    return;
+	}
+
 	drawPoint(points[count++]);
 
 	if (points.length <= count) {
