@@ -1,4 +1,10 @@
-var point = (0, 0, 0);
+var Point = function(x, y, z) {
+    this.x = x ? x : 0.0;
+    this.y = y ? y : 0.0;
+    this.z = z ? z : 0.0;
+};
+
+var point = new Point(0, 0, 0);
 var points = [];
 var isDrawing = false;
 
@@ -29,11 +35,11 @@ Leap.loop({enableGestures: true}, function(frame){
 });
 
 function getFingertip(finger){
-    var point = {
-	x: finger.tipPosition[0],
-	y: finger.tipPosition[1],
-	z: finger.tipPosition[2]
-    };
+    var point = new Point(
+	finger.tipPosition[0],
+	finger.tipPosition[1],
+	finger.tipPosition[2]
+    );
     return point;
 }
 
