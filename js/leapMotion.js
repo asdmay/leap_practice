@@ -29,10 +29,11 @@ Leap.loop({enableGestures: true}, function(frame){
 });
 
 function getFingertip(finger){
-    var point = {"x": finger.tipPosition[0],
-		 "y": finger.tipPosition[1],
-		 "z": finger.tipPosition[2]
-		};
+    var point = {
+	x: finger.tipPosition[0],
+	y: finger.tipPosition[1],
+	z: finger.tipPosition[2]
+    };
     return point;
 }
 
