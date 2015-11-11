@@ -7,7 +7,7 @@ function sketchProc(processing) {
 
     processing.draw = function() {
 	processing.background(0);
-	drawPoint(point);
+
 	if(!isDrawing){
 	    processing.fill(30);
 	    processing.stroke(30);
@@ -16,6 +16,7 @@ function sketchProc(processing) {
 	    processing.stroke(255);
 	}
 
+	drawPoint(point);
     };
 
     function drawPoint(point){
