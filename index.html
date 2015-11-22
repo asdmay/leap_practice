@@ -8,15 +8,21 @@
       <link rel="stylesheet" type"text/css" href="./index.css">
     </head>
     <body>
-      <div id="input">
-	<div id="status">STATUS</div>
-	<canvas id="sketch" width="500" height="500"></canvas>
-	<div class ="button">
-	  <div id ="rec-button">REC</div>
-	  <!-- <input type="button" value="REC" id ="rec-button" > -->
-	  <div id ="search-button">SEARCH</div>
+      <div id="show">
+	<div id="input">
+	  <div id="status">指先をleapmotionに近づけて下さい</div>
+	  <canvas id="sketch" width="550" height="450"></canvas>
+	  <div class ="button">
+	    <input type="button" value="入力開始" id ="rec-button" >
+	    <input type="button" value="入力終了" id ="search-button">
+	  </div>
 	</div>
-	<div id="use-img">USE img</div>
+	<div id="output">
+	  <ul>
+	    <li><a href="#"></a></li>
+
+	  </ul>
+	</div>
       </div>
       <script src="js/bundle.js"></script>
 
