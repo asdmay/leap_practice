@@ -7,7 +7,9 @@ var drawColor = '#000080';
 var sketch = new Sketch('sketch');
 var samples = require('./samples.json');
 
-var points = [];
+var points = [{x: 1, y: 2, z: 3},
+	      {x: 10, y: 20, z: 30},
+	      {x: 100, y: 200, z: 300}];
 var isRecording = false;
 
 Leap.loop({enableGestures: true}, function(frame){
