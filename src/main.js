@@ -78,15 +78,23 @@ function searchTimeSeries(tsQuery) {
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
+
     zClear(tsQuery);
+
     console.log(tsQuery);
+
     var minX_ts_Q = Math.min.apply(null,tsQuery.map(function(o){return o.x;}));
     var minY_ts_Q = Math.min.apply(null,tsQuery.map(function(o){return o.y;}));
+
     console.log(minX_ts_Q);
     console.log(minY_ts_Q);
+
     minSubtraction(tsQuery, minX_ts_Q, minY_ts_Q);
+
     console.log(tsQuery);
+
     var ts_Q = changeOfPosition(tsQuery);
+
     for (var i = 0; i < n; i++){
 	zClear(samples[i].points);
 	var ts_S = changeOfPosition(samples[i].points);
@@ -101,7 +109,9 @@ function searchTimeSeries(tsQuery) {
 	if(a.score > b.score) return 1;
 	return 0;
     });    
+
     console.log(score);
+
     return score;
 };
 
