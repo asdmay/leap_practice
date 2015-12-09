@@ -43,101 +43,73 @@ function getFingertip(finger){
     return point;
 }
 
-function changeOfPosition(data) {
-    var n = data.length - 1;
-    var d = [];
-    for (var i = 0; i < n; i++) {
-	d.push({
-	    x: data[i+1].x - data[i].x,
-	    y: data[i+1].y - data[i].y,
-	    z: data[i+1].z - data[i].z
-	});
-    }
-    return d;
-}
+// function changeOfPosition(data) {
+//     var n = data.length - 1;
+//     var d = [];
+//     for (var i = 0; i < n; i++) {
+// 	d.push({
+// 	    x: data[i+1].x - data[i].x,
+// 	    y: data[i+1].y - data[i].y,
+// 	    z: data[i+1].z - data[i].z
+// 	});
+//     }
+//     return d;
+// }
 
-function clear(data){
-    var n = data.length;
-    var d = [];
-    for (var i = 0; i < n; i++) {
-	d.push(0);
-    }
-    return d;
-}
+// function normalizePoints(points) {
+//     var d = points.map(function(d) { return [d.x, d.y, d.z]; });
+//     var ary = Array.prototype.concat.apply([], d);
+//     var min = Math.min.apply(null, ary);
+//     var max = Math.max.apply(null, ary);
 
+//     var npoints = [];
+//     for (var i = 0; i < points.length; i++) {
+// 	var p = points[i];
+// 	var np = {
+// 	    x: normalize(p.x, min, max),
+// 	    y: normalize(p.y, min, max),
+// 	    z: normalize(p.z, min, max)
+// 	};
 
+// 	npoints.push(np);
+//     }
 
-function setNormalizeArray(arrayX,arrayY,arrayZ){
-    var arrayN =[];
-    for (var i = 0; i < arrayX.length; i++) {
-	arrayN.push({
-	    x: arrayX[i],
-	    y: arrayY[i],
-	    z: arrayZ[i]
-	});
-    }
-    return arrayN;
-}
-
-function normalize(value, min, max) {
-    return (value - min) / (max - min);
-};
-
-// points を min から max で正規化
-function normalizePoints(points) {
-    var d = points.map(function(d) { return [d.x, d.y, d.z]; });
-    var ary = Array.prototype.concat.apply([], d);
-    var min = Math.min.apply(null, ary);
-    var max = Math.max.apply(null, ary);
-
-    var npoints = [];
-    for (var i = 0; i < points.length; i++) {
-	var p = points[i];
-	var np = {
-	    x: normalize(p.x, min, max),
-	    y: normalize(p.y, min, max),
-	    z: normalize(p.z, min, max)
-	};
-
-	npoints.push(np);
-    }
-
-    return npoints;
-}
+//     return npoints;
+// }
 
 
-function extractAxis(points, axis) {
-    return points.map(function(e) { return e[axis]; });
-}
+// function extractAxis(points, axis) {
+//     return points.map(function(e) { return e[axis]; });
+// }
 
 function searchTimeSeries(tsQuery) {
     // スコアの計算
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
+    
+    // var ts_Qd = changeOfPosition(tsQuery);
+    // var ts_Qn = normalizePoints(ts_Qd);
+    // var ts_QX = extractAxis(ts_Qn, 'x');
+    // var ts_QY = extractAxis(ts_Qn, 'y');
+    // var ts_QZ = extractAxis(ts_Qn, 'z');
+    // var ts_QZc = clear(ts_QZ);
 
-    var ts_Qd = changeOfPosition(tsQuery);
-    var ts_Qn = normalizePoints(ts_Qd);
-    var ts_QX = extractAxis(ts_Qn, 'x');
-    var ts_QY = extractAxis(ts_Qn, 'y');
-    var ts_QZ = extractAxis(ts_Qn, 'z');
-    var ts_QZc = clear(ts_QZ);
-
-    var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
-    console.log(ts_Q);
-
+    // var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
+    // console.log(ts_Q);
+    // console.log(tsQuery);
     for (var i = 0; i < n; i++){
 
-	var ts_Sd = changeOfPosition(samples[i].points);
-	var ts_Sn = normalizePoints(ts_Sd);
-	var ts_SX = extractAxis(ts_Sn, 'x');
-	var ts_SY = extractAxis(ts_Sn, 'y');
-	var ts_SZ = extractAxis(ts_Sn, 'z');
-	var ts_SZc = clear(ts_SZ);
+	// var ts_Sd = changeOfPosition(samples[i].points);
+	// var ts_Sn = normalizePoints(ts_Sd);
+	// var ts_SX = extractAxis(ts_Sn, 'x');
+	// var ts_SY = extractAxis(ts_Sn, 'y');
+	// var ts_SZ = extractAxis(ts_Sn, 'z');
+	// var ts_SZc = clear(ts_SZ);
 	
-	var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
-	
-	var d = DTW.distance(ts_Q, ts_S, distance, 30);
+	// var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
+	// console.log(samples[i].points);
+	var d = DTW.distance(tsQuery, samples[i].points, distance, 30);
 	score.push({
 	    name:samples[i].name,
 	    score:d
