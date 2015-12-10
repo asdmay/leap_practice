@@ -110,11 +110,14 @@ function extractAxis(points, axis) {
    var lineLength = changeOfDistance(points);
     var totalLength  = function(lineLength) {
     var totalLength = 0;
-    arr.forEach(function(elm) {
+    lineLength.forEach(function(elm) {
         totalLength += elm;
     });
     return totalLength;
 };
 
 var arr = [1, 2, 3, 4, 5];
+console.log("lineLength");
+console.log(lineLength);
+console.log("totalLength");
 console.log( totalLength(lineLength) );
