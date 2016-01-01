@@ -9,8 +9,7 @@ var showColor = '#87ceeb';
 var drawColor = '#000080';
 
 var sketch = new Sketch('sketch');
-// var samples = require('./samples.json');
-var samples = require('./test/data.json');
+var samples = require('./samples.json');
 var points = [];
 var isRecording = false;
 var result = [];
@@ -83,12 +82,7 @@ function setNormalizeArray(arrayX, arrayY, arrayZ){
 }
 
 function normalize(value, min, max) {
-    if(min == max){
-	var d = 0;
-    }else{
-	d = (value - min) / (max - min);
-    }
-    return d;
+    return (value - min) / (max - min);
 };
 
 // points を min から max で正規化
@@ -119,11 +113,7 @@ function timeNormalize(array) {
 
     var narray = [];
     for (var i = 0; i < array.length; i++) {
-	if(min == max){
-	    var nv = 0;
-	}else{
-	    nv = (array[i] - min) / (max - min);
-	}
+	var nv = (array[i] - min) / (max - min);
 	narray.push(nv);
     }
     return narray;
@@ -195,9 +185,9 @@ function searchTimeSeries(tsQuery) {
 	});
     }
     score.sort(function(a,b){
-    	if(a.score < b.score) return -1;
-    	if(a.score > b.score) return 1;
-    	return 0;
+	if(a.score < b.score) return -1;
+	if(a.score > b.score) return 1;
+	return 0;
     });    
     // console.log(score);
     return score;
@@ -225,10 +215,9 @@ function recordFinger(){
 function drawTimeSeriesData(id, points) {
     var cs  = document.getElementById(id);
     var ctx = cs.getContext('2d');
-
     var w = cs.width;
     var h = cs.height;
-    
+
     // processing の map 関数と同じやつ
     function mapValue(value, start1, stop1, start2, stop2) {
 	var ratio = (value - start1) / (stop1 - start1);
@@ -241,11 +230,11 @@ function drawTimeSeriesData(id, points) {
     function render() {
 	var p = points[i];
 	var x = mapValue(p.x, -256, 256, 0, w);
-	var y = mapValue(p.y, 0, 550, h, 0);
+	var y = mapValue(p.y, -256, 256, h, 0);
 
 	ctx.clearRect(0, 0, w, h);
 
-	ctx.strokeStyle = drawColor;
+	ctx.strokeStyle = '#6DD900';
 	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, Math.PI*2, false);
 	ctx.stroke();
@@ -258,6 +247,7 @@ function drawTimeSeriesData(id, points) {
 	    i = 0;
 	}
     }
+
     setInterval(render, 1000/60.0);
 }
 
@@ -278,7 +268,7 @@ function searchData(){
 		    append(item.name).
 		    append('<br/>').
 		    append(item.score)
-	    ).trigger('create');
+	    ).trigger('create').append('<hr>');
 	    $('.view').show(img);
 
 	    // 動的にキャンバスを作成
@@ -288,15 +278,11 @@ function searchData(){
 		height: 160
 	    });
 	    // 任意の位置にキャンバスを追加
-//	    $("#output").append($canvas);
-	    $("#output").append(
-		$("<div/>").attr('class', 'move').append($canvas)
-	    ).trigger('create');
+	    $("#output").append($canvas);
 	    // 指定した id のキャンバスに points を描く
 	    drawTimeSeriesData('canvas-' + item.name, item.points);
 	});
 	console.log('search end');
-	console.log(points);
 
     }else{
 	console.log("nothing");

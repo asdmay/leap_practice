@@ -22,7 +22,6 @@ Leap.loop({enableGestures: true}, function(frame){
     }
 
     var hand = frame.hands[0];
-                                                                                                                                                                                                                                                                                                                                                       
     var finger = hand.indexFinger;
     point = getFingertip(finger);
 
