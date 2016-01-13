@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+       <!-- <link rel="stylesheet" type"text/css" href="./css/style.css"> -->
+  </head>
+
+   <script>
+     $(function() {
+  $.getJSON("data.json" , function(data) {
+    var
+      ulObj = $("#output"),
+      len = data.length;
+
+    for(var i = 0; i < len; i++) {
+      ulObj.append($("<li>").attr({"id":data[i].name}).text(data[i].points));
+    }
+  });
+});
+    </script>
+  
+  <body>
+    <div id="show">
+      <div id="input">
+
+      <div id="output">
+	<!-- <div class ="img"></div>
+	     <div class ="result"></div> -->
+      </div>
+    </div>
+   
+
+    
+  </body>
+</html>
