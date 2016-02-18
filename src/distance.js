@@ -81,14 +81,4 @@ Distance.spatialDistance = function(ts1, ts2) {
     return {"x": xdist, "y": ydist};
 };
 
-
-// combination of temporal and spatial distance
-Distance.tsDist = function(ts1, ts2) {
-    var tdist = Distance.temporalDistance(ts1, ts2);
-    var sdist = Distance.spatialDistance(ts1, ts2);
-
-    var score = tdist * sdist.x * sdist.y;
-    return score;
-};
-
 module.exports = Distance;

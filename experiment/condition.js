@@ -19,7 +19,7 @@ Condition.baseline = function(ts1, ts2) {
     return 0;
 };
 
-// approach1
+// baseline
 // DTW による手法
 Condition.dtw = function(ts1, ts2) {
     // normalize
@@ -33,7 +33,11 @@ Condition.dtw = function(ts1, ts2) {
 // approach2
 // DTW (temporal and spatial features) による手法
 Condition.dtw_ts = function(ts1, ts2) {
-    return Distance.tsDist(ts1, ts2);
+    var tdist = Distance.temporalDistance(ts1, ts2);
+    var sdist = Distance.spatialDistance(ts1, ts2);
+
+    var score = tdist * sdist.x * sdist.y;
+    return score;
 };
 
 module.exports = Condition;
