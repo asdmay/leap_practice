@@ -1,4 +1,6 @@
 var LinearInterpolation = require('../src/LinearInterpolation.js');
+var Preprocess = require('../src/preprocess.js');
+var DTW = require('../src/dtw.js');
 var Distance = require('../src/distance.js');
 
 var Condition = {};
@@ -22,11 +24,21 @@ Condition.baseline = function(ts1, ts2) {
 // baseline
 // DTW による手法
 Condition.dtw = function(ts1, ts2) {
+    function distance3D(p1, p2) {
+	var x = Math.pow(p1.x - p2.x, 2);
+	var y = Math.pow(p1.y - p2.y, 2);
+	var z = Math.pow(p1.z - p2.z, 2);
+	return Math.sqrt(x + y + z);
+    }
+
     // normalize
+    var ts1_n = Preprocess.spatialNormalize(ts1);
+    var ts2_n = Preprocess.spatialNormalize(ts2);
 
     // dtw
+    var score = DTW.distance(ts1_n, ts2_n, distance3D, 30);
 
-    return 0;
+    return score;
 };
 
 
