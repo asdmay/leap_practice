@@ -36,21 +36,11 @@ Distance.temporalDistance = function(ts1, ts2) {
 
 // 空間的類似度を求めるための前処理
 function spatialPreprocess(ts) {
-    function ignoreZAxis(ts) {
-	var xy = [];
-	for (var i = 0; i < ts.length; i++) {
-	    // set z-axis to 0
-	    var d = {"x": ts[i].x, "y": ts[i].y, "z": 0};
-	    xy.push(d);
-	}
-	return xy;
-    }
-
     // linear interpolation
     var ts_li = LinearInterpolation.compute(ts);
 
     // ignore z-axis
-    var ts_li_z0 = ignoreZAxis(ts_li);
+    var ts_li_z0 = Preprocess.ignoreZAxis(ts_li);
     
     // normalize
     var ts_li_z0_n = Preprocess.spatialNormalize(ts_li_z0);
