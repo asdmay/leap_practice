@@ -1,3 +1,11 @@
+function splitSubjectName(dataName) {
+    var ary = dataName.split('-');
+    var name = ary[0];
+    var pattern = ary.slice(1).join('-');
+
+    return {name: name, pattern: pattern};
+}
+
 // for sorting
 function resultCompare(a, b) {
     return a.score - b.score;
@@ -43,8 +51,10 @@ for (var s_i = 0; s_i < subjects.length; s_i++) {
 
 
 // output result
-console.log('subject,target,baseline,approach');
+console.log('subject_name,subject_pattern,target_pattern,baseline,approach');
 result.forEach(function(e, i, ary) {
+    var s = splitSubjectName(e.subject);
+
     // output result
-    console.log(e.subject + ',' + e.target + ',' + e.baseline + ',' + e.approach);
+    console.log(s.name + ',' + s.pattern + ',' + e.target + ',' + e.baseline + ',' + e.approach);
 });
