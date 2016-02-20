@@ -14,16 +14,13 @@ function distance1D(p1, p2) {
 
 // 時間的類似度を求めるための前処理
 function temporalPreprocess(ts) {
-    // linear interpolation?
-    var ts_li = LinearInterpolation.compute(ts);
-
     // change of distance
-    var ts_li_cod = Preprocess.changeOfDistance(ts_li);
+    var ts_cod = Preprocess.changeOfDistance(ts);
 
     // normalize
-    var ts_li_cod_n = Preprocess.temporalNormalize(ts_li_cod);
+    var ts_cod_n = Preprocess.temporalNormalize(ts_cod);
 
-    return ts_li_cod_n;
+    return ts_cod_n;
 }
 
 // 時間的類似度を求める関数
