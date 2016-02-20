@@ -1,4 +1,8 @@
-var Condition = require('./condition.js');
+// for sorting
+function resultCompare(a, b) {
+    return a.score - b.score;
+}
+
 
 // subjects
 var fs = require('fs');
@@ -10,6 +14,7 @@ var targets = require('../src/test/data.json');
 
 
 // experiment
+var Condition = require('./condition.js');
 var result = [];
 for (var s_i = 0; s_i < subjects.length; s_i++) {
     var subject = subjects[s_i];
@@ -43,9 +48,3 @@ result.forEach(function(e, i, ary) {
     // output result
     console.log(e.subject + ',' + e.target + ',' + e.baseline + ',' + e.approach);
 });
-
-
-// for sorting
-function resultCompare(a, b) {
-    return a.score - b.score;
-}
