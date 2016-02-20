@@ -38,18 +38,15 @@ Distance.temporalDistance = function(ts1, ts2) {
 function spatialPreprocess(ts) {
     // linear interpolation
     var ts_li = LinearInterpolation.compute(ts);
-
-    // ignore z-axis
-    var ts_li_z0 = Preprocess.ignoreZAxis(ts_li);
     
     // normalize
-    var ts_li_z0_n = Preprocess.spatialNormalize(ts_li_z0);
+    var ts_li_n = Preprocess.spatialNormalize(ts_li);
 
     // get x-axis
-    var ts_x = ts_li_z0_n.map(function(e) { return e.x; });
+    var ts_x = ts_li_n.map(function(e) { return e.x; });
 
     // get y-axis
-    var ts_y = ts_li_z0_n.map(function(e) { return e.y; });
+    var ts_y = ts_li_n.map(function(e) { return e.y; });
 
     return {"x": ts_x, "y": ts_y};
 }
