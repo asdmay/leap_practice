@@ -28,6 +28,18 @@ Preprocess.normalizeXYZArray = function(array, min, max) {
 };
 
 
+// 3次元時系列データの z 軸の値を全て 0 にする
+Preprocess.ignoreZAxis = function(ts) {
+    var xy = [];
+    for (var i = 0; i < ts.length; i++) {
+	// set z-axis to 0
+	var d = {"x": ts[i].x, "y": ts[i].y, "z": 0};
+	xy.push(d);
+    }
+    return xy;
+};
+
+
 // 3次元時系列データの変移を求める関数
 // 1次元時系列データを返す
 Preprocess.changeOfDistance = function(ts) {

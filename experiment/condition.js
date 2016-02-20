@@ -24,6 +24,9 @@ Condition.baseline = function(ts1, ts2) {
 // baseline
 // DTW による手法
 Condition.dtw = function(ts1, ts2) {
+    ts1 = Preprocess.ignoreZAxis(ts1);
+    ts2 = Preprocess.ignoreZAxis(ts2);
+
     function distance3D(p1, p2) {
 	var x = Math.pow(p1.x - p2.x, 2);
 	var y = Math.pow(p1.y - p2.y, 2);
@@ -45,6 +48,9 @@ Condition.dtw = function(ts1, ts2) {
 // approach2
 // DTW (temporal and spatial features) による手法
 Condition.dtw_ts = function(ts1, ts2) {
+    ts1 = Preprocess.ignoreZAxis(ts1);
+    ts2 = Preprocess.ignoreZAxis(ts2);
+
     var tdist = Distance.temporalDistance(ts1, ts2);
     var sdist = Distance.spatialDistance(ts1, ts2);
 
