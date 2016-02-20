@@ -15,14 +15,15 @@ function distance1D(p1, p2) {
 // 時間的類似度を求めるための前処理
 function temporalPreprocess(ts) {
     // linear interpolation?
+    var ts_li = LinearInterpolation.compute(ts);
 
     // change of distance
-    var ts_cod = Preprocess.changeOfDistance(ts);
+    var ts_li_cod = Preprocess.changeOfDistance(ts_li);
 
     // normalize
-    var ts_cod_n = Preprocess.temporalNormalize(ts_cod);
+    var ts_li_cod_n = Preprocess.temporalNormalize(ts_li_cod);
 
-    return ts_cod_n;
+    return ts_li_cod_n;
 }
 
 // 時間的類似度を求める関数
@@ -78,16 +79,6 @@ Distance.spatialDistance = function(ts1, ts2) {
     var ydist = DTW.distance(ts1_p.y, ts2_p.y, distance1D, 30);
     
     return {"x": xdist, "y": ydist};
-};
-
-
-// combination of temporal and spatial distance
-Distance.tsDist = function(ts1, ts2) {
-    var tdist = Distance.temporalDistance(ts1, ts2);
-    var sdist = Distance.spatialDistance(ts1, ts2);
-
-    var score = tdist * sdist.x * sdist.y;
-    return score;
 };
 
 module.exports = Distance;
