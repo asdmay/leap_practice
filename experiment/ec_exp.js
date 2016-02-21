@@ -61,12 +61,13 @@ for (var s_i = 0; s_i < subjects.length; s_i++) {
 
 
 // output result
-console.log('subject_name,subject_pattern,target_pattern,baseline,approach');
+console.log('subject_name,subject_pattern,target_pattern,baseline,approach,match');
 result.forEach(function(e, i, ary) {
     var s = splitSubjectName(e.subject);
-
     s.pattern = formatPatternName(s.pattern);
 
+    var match = s.pattern == e.target;
+
     // output result
-    console.log(s.name + ',' + s.pattern + ',' + e.target + ',' + e.baseline + ',' + e.approach);
+    console.log(s.name + ',' + s.pattern + ',' + e.target + ',' + e.baseline + ',' + e.approach + ',' + match);
 });
