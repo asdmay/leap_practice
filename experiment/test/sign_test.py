@@ -30,12 +30,15 @@ if __name__ == '__main__':
 
     baseline = df.groupby(key, group_keys=False).agg(findIndex, column='baseline')
     baseline.to_csv(filename + '.baseline_rank.csv')
+    print('baseline')
     print(baseline)
 
     approach = df.groupby(key, group_keys=False).agg(findIndex, column='approach')
     approach.to_csv(filename + '.approach_rank.csv')
+    print('approach')
     print(approach)
 
     sign_test = baseline - approach
-    approach.to_csv(filename + '.sign_test.csv')
+    sign_test.to_csv(filename + '.sign_test.csv')
+    print('sign_test')
     print(sign_test)
