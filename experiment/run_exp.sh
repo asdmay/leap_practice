@@ -18,5 +18,6 @@ done
 # rank
 for i in `seq -w 20`;
 do
-    ./test/rank.py ./result/experiment${i}_result.csv;
+    # ./test/rank.py ./result/experiment${i}_result.csv;
+    ./test/sign_test.py ./result/experiment${i}_result.csv;
 done
