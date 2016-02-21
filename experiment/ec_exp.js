@@ -6,6 +6,16 @@ function splitSubjectName(dataName) {
     return {name: name, pattern: pattern};
 }
 
+function formatPatternName(patternName) {
+    var ary = patternName.split('-');
+    var generalForm = ary[0];
+    var detail = ary[1];
+
+    return generalForm + "(" + detail + ")";
+}
+
+
+
 // for sorting
 function resultCompare(a, b) {
     return a.score - b.score;
@@ -54,6 +64,8 @@ for (var s_i = 0; s_i < subjects.length; s_i++) {
 console.log('subject_name,subject_pattern,target_pattern,baseline,approach');
 result.forEach(function(e, i, ary) {
     var s = splitSubjectName(e.subject);
+
+    s.pattern = formatPatternName(s.pattern);
 
     // output result
     console.log(s.name + ',' + s.pattern + ',' + e.target + ',' + e.baseline + ',' + e.approach);
